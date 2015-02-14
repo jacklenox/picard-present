@@ -1,0 +1,152 @@
+/*
+Theme Name: Picard Present
+Theme URI: http://jacklenox.com
+Author: Jack Lenox
+Author URI: http://jacklenox.com
+Description: A pretty amazing WordPress powered by React.js and developed by Jack Lenox and Theme Gen
+Version: 0.1
+License: GNU General Public License v2 or later
+License URI: http://www.gnu.org/licenses/gpl-2.0.html
+Text Domain: picard
+Tags:
+
+This theme, like WordPress, is licensed under the GPL.
+Use it to make something cool, have fun, and share what you've learned with others.
+*/
+
+body {
+	background-color: #0085be;
+	margin: 0;
+}
+
+.hentry-wrapper {
+	background-color: #0085be;
+	color: white;
+	height: 100%;
+	position: absolute;
+	width: 100%;
+}
+
+.hentry-wrapper article {
+	margin: 0 4em;
+	position: relative;
+	top: 50%;
+	transform: translateY(-50%);
+}
+
+h1.entry-title {
+	color: white;
+	font-family: "Montserrat", Helvetica, Arial, sans-serif;
+	font-size: 5em;
+	margin-top: 0;
+	text-align: center;
+}
+
+p, li {
+	font-family: "Open Sans", Helvetica, Arial, sans-serif;
+	font-size: 2.4em;
+}
+
+p {
+	text-align: center;
+}
+
+a {
+	color: white;
+	text-decoration: none;
+}
+
+img {
+	height: auto;
+	max-width: 100%;
+}
+
+blockquote {
+	background: white;
+	padding: .1em 5em;
+	border-left: 20px solid #87A6BC;
+}
+
+blockquote p {
+	color: #2E4453;
+	text-align: left;
+}
+
+/* Text meant only for screen readers */
+.says,
+.screen-reader-text,
+.entry-meta {
+	clip: rect(1px, 1px, 1px, 1px);
+	height: 1px;
+	overflow: hidden;
+	position: absolute !important;
+	width: 1px;
+}
+
+.picard-enter {
+	-webkit-animation: slideFromRight .25s ease both;
+	animation: slideFromRight .25s ease both;
+	position: absolute;
+	width: 100%;
+}
+.picard-enter.picard-enter-active {
+  opacity: 1;
+}
+
+@-webkit-keyframes slideFromRight {
+	from {
+		opacity: 0.3;
+		-webkit-transform: translateX(100%);
+	}
+	to {
+		opacity: 1;
+		-webkit-transform: translateX(0);
+	}
+}
+
+@keyframes slideFromRight {
+	from {
+		opacity: 0.3;
+		-webkit-transform: translateX(100%);
+		transform: translateX(100%);
+	}
+	to {
+		opacity: 1;
+		-webkit-transform: translateX(0);
+		transform: translateX(0);
+	}
+}
+
+.picard-leave {
+	-webkit-animation: slideToLeft .25s ease both;
+	animation: slideToLeft .25s ease both;
+	position: absolute;
+	width: 100%;
+}
+.picard-leave.picard-leave-active {
+  opacity: 0.01;
+}
+
+@-webkit-keyframes slideToLeft {
+	from {
+		opacity: 1;
+		-webkit-transform: translateX(0);
+	}
+	to {
+		opacity: 0.3;
+		-webkit-transform: translateX(-100%);
+	}
+}
+
+@keyframes slideToLeft {
+	from {
+		opacity: 1;
+		-webkit-transform: translateX(0);
+		transform: translateX(0);
+	}
+	to {
+		opacity: 0.3;
+		-webkit-transform: translateX(-100%);
+		transform: translateX(-100%);
+	}
+}
