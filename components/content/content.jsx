@@ -14,7 +14,6 @@ var Loop = require( './loop/loop.jsx' );
 Content = React.createClass({
 	loadPostsFromServer: function() {
 		var postData = JSON.parse( localStorage.getItem( this.props.url ) );
-		console.log( postData );
 		if ( postData ) {
 			this.setState({data: postData});
 			document.title = postData[0].title;
@@ -42,9 +41,7 @@ Content = React.createClass({
 
 		// Set body class if there isn't an animation happening
 		if ( document.body.className.indexOf( 'move' ) > -1 ) {
-			console.log('found it!');
 		} else {
-			console.log("don't found it");
 			document.body.className = this.props.bodyClass;
 		}
 
