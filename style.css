@@ -28,22 +28,31 @@ body {
 }
 
 .hentry-wrapper article {
-	margin: 0 4em;
+	margin: 0 8em;
 	position: relative;
 	top: 50%;
+	-webkit-transform: translateY(-50%);
 	transform: translateY(-50%);
+}
+
+.post-26 header, .post-54 header, .post-59 header, .post-119 header, .post-101 header {
+	display: none;
 }
 
 h1.entry-title {
 	color: white;
 	font-family: "Montserrat", Helvetica, Arial, sans-serif;
-	font-size: 5em;
+	font-size: 4em;
 	margin-top: 0;
 	text-align: center;
 }
 
 p, li {
 	font-family: "Open Sans", Helvetica, Arial, sans-serif;
+	font-size: 2em;
+}
+
+pre {
 	font-size: 2.4em;
 }
 

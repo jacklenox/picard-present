@@ -1,3 +1,8 @@
+<?php
+if ( is_front_page() ) {
+	wp_redirect( get_permalink( 1 ));
+}
+?>
 <!DOCTYPE html>
 <html <?php language_attributes(); ?>>
 <head>
