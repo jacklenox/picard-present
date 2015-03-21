@@ -8,9 +8,9 @@
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/Automattic/Picard/issues"
+    "url": "https://github.com/jacklenox/picard-present/issues"
   },
-  "homepage": "https://github.com/Automattic/Picard",
+  "homepage": "https://github.com/jacklenox/picard-present",
   "devDependencies": {
     "browserify": "~7.0.3",
     "gulp": "~3.8.10",
