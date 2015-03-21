@@ -17,6 +17,7 @@ Content = React.createClass({
 		console.log( postData );
 		if ( postData ) {
 			this.setState({data: postData});
+			document.title = postData[0].title;
 		} else {
 			jQuery.ajax({
 				url: this.props.url,
