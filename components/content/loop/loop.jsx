@@ -15,19 +15,6 @@ var ReactCSSTransitionGroup = React.addons.CSSTransitionGroup;
  * Renders list of posts
  */
 Loop = React.createClass({
-	addMoveRight: function( e ) {
-		var bodyClass = document.body.className;
-		document.body.className = bodyClass + ' move-right';
-	},
-
-	addMoveLeft: function( e ) {
-		var bodyClass = document.body.className;
-		document.body.className = bodyClass + ' move-left';
-	},
-
-	removeMove: function( e ) {
-		document.body.className = 'single';
-	},
 
 	render: function() {
 		var context = this.props.context,
@@ -44,16 +31,9 @@ Loop = React.createClass({
 		document.onkeydown = function( e ) {
 			// Left arrow keydown
 			var el,
-				removeClass,
 				url;
 			if ( e.keyCode === 37 ) {
 				e.preventDefault();
-				window.clearTimeout( removeClass );
-				self.removeMove();
-				self.addMoveLeft();
-				removeClass = window.setTimeout( function() {
-					self.removeMove();
-				}, 1000 );
 				el = document.querySelector('.nav-previous a');
 				url = el.href;
 				url = url.replace(/^.*\/\/[^\/]+/, '');
@@ -63,12 +43,6 @@ Loop = React.createClass({
 			// Right arrow keydown
 			if ( e.keyCode === 39 ) {
 				e.preventDefault();
-				window.clearTimeout( removeClass );
-				self.removeMove();
-				self.addMoveRight();
-				removeClass = window.setTimeout( function() {
-					self.removeMove();
-				}, 1000 );
 				el = document.querySelector('.nav-next a');
 				url = el.href;
 				url = url.replace(/^.*\/\/[^\/]+/, '');

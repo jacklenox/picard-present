@@ -54,6 +54,7 @@ p, li {
 
 pre {
 	font-size: 2.4em;
+	word-wrap: break-word;
 }
 
 p {

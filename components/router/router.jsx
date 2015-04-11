@@ -2,7 +2,8 @@
  * External dependencies
  */
 var React = require( 'react' ),
-	page = require( 'page' );
+	page = require( 'page' ),
+	request = require( 'superagent' );
 
 /**
  * Internal dependencies
@@ -16,23 +17,69 @@ var Router = React.createClass({
 		var self = this;
 
 		page( '/', function ( ctx ) {
-			self.setState({ component: <Content url="/wp-json/posts" bodyClass="index" /> });
+			var data,
+				slug = ctx.params.slug,
+				url = "/wp-json/posts";
+			request
+				.get( url )
+				.end( function( err, res ) {
+					data = JSON.parse( res.text );
+					self.setState({ component: <Content data={ data } bodyClass="index" /> });
+				});
 		});
 
 		page( '/:year/:month/:day/:slug', function ( ctx ) {
-			var slug = ctx.params.slug;
-			var url = "/wp-json/posts/?filter[name]=" + slug;
-			self.setState({ component: <Content url={url} bodyClass="single" /> });
+
+			var data,
+				slug = ctx.params.slug,
+				url = "/wp-json/posts/?filter[name]=" + slug,
+				postData = JSON.parse( sessionStorage.getItem( url ) );
+
+			if ( postData ) {
+
+				self.setState({ component: <Content data={ postData } bodyClass="single" /> });
+				document.title = postData[0].title;
+
+			} else {
+
+				request
+					.get( url )
+					.end( function( err, res ) {
+						data = JSON.parse( res.text );
+						sessionStorage.setItem( url, JSON.stringify( data ) );
+						document.title = data[0].title;
+						self.setState({ component: <Content data={ data } bodyClass="single" /> });
+					});
+
+			}
 		});
 
 		page( '*', function ( ctx ) {
-			var slug = ctx.pathname;
-			if(slug.substr(-1) == '/') {
-				slug = slug.substr(0, slug.length - 1);
+			if ( ctx.state.pageData ) {
+				self.setState({ component: <Page data={ ctx.state.pageData } bodyClass="page" /> });
+			} else {
+				var admin = 'wp-admin';
+				var slug = ctx.pathname;
+
+				if ( slug.indexOf( admin ) > -1 ) {
+					document.location.href = ctx.path;
+					return;
+				}
+
+				if(slug.substr(-1) == '/') {
+					slug = slug.substr(0, slug.length - 1);
+				}
+				var part = slug.substring(slug.lastIndexOf('/') + 1);
+				var url = "/wp-json/posts/?type[]=page&filter[name]=" + part;
+				request
+					.get( url )
+					.end( function( err, res ) {
+						data = JSON.parse( res.text );
+						ctx.state.pageData = data;
+						ctx.save();
+						self.setState({ component: <Content data={ data } bodyClass="page" /> });
+					});
 			}
-			var part = slug.substring(slug.lastIndexOf('/') + 1);
-			var url = "/wp-json/posts/?type[]=page&filter[name]=" + part;
-			self.setState({ component: <Content url={url} bodyClass="page" /> });
 		});
 
 		page.start();
